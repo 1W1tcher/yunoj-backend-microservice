@@ -1,0 +1,54 @@
+version: '3'
+services:
+  yunoj-backend-gateway:
+    container_name: yunoj-backend-gateway
+    build:
+      context: ./yunoj-backend-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8101:8101"
+    networks:
+      - mynetwork
+
+  yunoj-backend-user-service:
+    container_name: yunoj-backend-user-service
+    build:
+      context: ./yunoj-backend-user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8102:8102"
+    networks:
+      - mynetwork
+#    depends_on:
+#      - yunoj-backend-gateway
+
+  yunoj-backend-question-service:
+    container_name: yunoj-backend-question-service
+    build:
+      context: ./yunoj-backend-question-service
+      dockerfile: Dockerfile
+    ports:
+      - "8103:8103"
+    networks:
+      - mynetwork
+#    depends_on:
+#      - yunoj-backend-user-service
+#      - yunoj-backend-gateway
+
+  yunoj-backend-judge-service:
+    container_name: yunoj-backend-judge-service
+    build:
+      context: ./yunoj-backend-judge-service
+      dockerfile: Dockerfile
+    ports:
+      - "8104:8104"
+    networks:
+      - mynetwork
+#    depends_on:
+#      - yunoj-backend-user-service
+#      - yunoj-backend-question-service
+#      - yunoj-backend-gateway
+
+
+networks:
+  mynetwork:
